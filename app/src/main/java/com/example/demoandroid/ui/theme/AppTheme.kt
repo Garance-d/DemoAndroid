@@ -40,6 +40,7 @@ fun EniTextField(hintText: String = "", modifier: Modifier = Modifier) {
 
         value = "", onValueChange = {},
         modifier = modifier.fillMaxWidth().border(2.dp, color = Color(0x99000000), shape = RoundedCornerShape(5.dp))
+            .background(brush = Brush.linearGradient(listOf(Color(0x55000000), Color(0X10f5cf71))))
         ,
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color(0x55000000), //55 pour la transparence puis le reste pour la couleur
