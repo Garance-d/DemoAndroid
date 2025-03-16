@@ -3,14 +3,9 @@ package com.example.demoandroid.ui.theme
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,42 +23,30 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.demoandroid.R
 
 @Composable
-fun EniTextField(hintText: String = "", modifier: Modifier = Modifier) {
-    TextField(
-
-        value = "", onValueChange = {},
-        modifier = modifier.fillMaxWidth().border(2.dp, color = Color(0x99000000), shape = RoundedCornerShape(5.dp))
-            .background(brush = Brush.linearGradient(listOf(Color(0x55000000), Color(0X10f5cf71))))
-        ,
+fun EniTextField(hintText : String = "", modifier: Modifier = Modifier){
+    TextField(value = "", onValueChange = {},
+        modifier = modifier.fillMaxWidth(),
         colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0x55000000), //55 pour la transparence puis le reste pour la couleur
-            focusedContainerColor = Color(0xCC000000),
+            unfocusedContainerColor = Color(0x66000000),
+            focusedContainerColor = Color(0x99000000),
             unfocusedIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-
-
-            ),
-        shape = RoundedCornerShape(5.dp),
-
-
+            focusedIndicatorColor = Color.Transparent
+        ),
+        shape = RoundedCornerShape(40.dp),
         placeholder = {
-            Text(text = hintText, color = Color(0xBBFFFFFF))
-
+            Text(text = hintText, color = Color(0xAAFFFFFF))
         })
 }
 
 @Composable
-fun EniButton(buttonText: String, modifier: Modifier = Modifier) {
-    Button(
-        onClick = {},
-        border = BorderStroke((2.dp), Color(0x99000000)),
+fun EniButton(buttonText : String, modifier: Modifier = Modifier, onClick: () -> Unit = {}){
+    Button(onClick = onClick,
+        border = BorderStroke(2.dp, Color(0x55FFFFFF)),
         contentPadding = PaddingValues(),
         modifier = modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
@@ -72,46 +55,41 @@ fun EniButton(buttonText: String, modifier: Modifier = Modifier) {
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(brush = Brush.linearGradient(listOf(Color(0x55000000), Color(0X10f5cf71)))).fillMaxWidth().padding(vertical = 14.dp)
+            modifier = Modifier.background(brush = Brush.linearGradient(
+                listOf(Color(0xFF54668b), Color(0xFF4188b5))
+            )).fillMaxWidth().padding(vertical = 14.dp)
         ) {
-            Text(buttonText)
+            Text(text = buttonText)
         }
     }
 }
 
 @Composable
-// content est utiliser pour apporter un autre composant dans les ()
-fun WrapPadding(content: @Composable () -> Unit) {
+fun WrapPadding(content: @Composable () -> Unit){
     Box(modifier = Modifier.padding(10.dp)) {
         content()
     }
 }
 
 @Composable
-fun RowScope.WrapPaddingRowWeight(weight: Float = 1f, content: @Composable () -> Unit) {
-    Box(
-        modifier = Modifier
-            .padding(10.dp)
-            .weight(weight)
-    ) {
+fun RowScope.WrapPaddingRowWeight(weight: Float = 1f, content: @Composable () -> Unit){
+    Box(modifier = Modifier.padding(10.dp).weight(weight)) {
         content()
     }
 }
+
 @Composable
-fun  EniPage(content: @Composable () -> Unit){
+fun EniPage(content: @Composable () -> Unit){
     DemoAndroidTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
             Box(modifier = Modifier.padding(innerPadding)) {
                 Image(
-                    painterResource(R.drawable.rain),
+                    painter = painterResource(R.drawable.mobile_2),
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
                 content()
-
             }
         }
     }

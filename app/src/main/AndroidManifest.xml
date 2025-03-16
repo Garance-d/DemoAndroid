@@ -13,15 +13,30 @@
         android:theme="@style/Theme.DemoAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".demostateful.DemoStateful2Activity"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".demostateful.DemoStatefulActivity"
+            android:exported="true"
+            >
+        </activity>
+
+        <activity
+            android:name=".demointent.DemoPage1Activity"
+            android:exported="true"
+            >
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.DemoAndroid">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
