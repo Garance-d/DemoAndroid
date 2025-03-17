@@ -19,21 +19,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.demoandroid.demomvvm.DemoViewModelPage
 import com.example.demoandroid.demostateful.Person
 import com.example.demoandroid.ui.theme.EniButton
 import com.example.demoandroid.ui.theme.EniPage
 import com.example.demoandroid.ui.theme.WrapPadding
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class DemoViewModelActivity : ComponentActivity() {
 
-    // Déclarer un viewModel
+    // Déclarer un view model
     var viewModel = DemoViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             DemoViewModelPage(viewModel)
         }
@@ -42,13 +41,13 @@ class DemoViewModelActivity : ComponentActivity() {
 
 @Composable
 fun DemoViewModelPage(viewModel: DemoViewModel) {
-    // J'ecoute les changements de Person en temps réel
-    val personState by viewModel.persons.collectAsState()
+    // J'ecoute les changements de la liste des persons dans le view model en temps réel
+    val personsState by viewModel.persons.collectAsState()
 
     EniPage {
         Column(modifier = Modifier.padding(30.dp)) {
             LazyColumn {
-                items(personState) { person ->
+                items(personsState) { person ->
                     Text(
                         text = "Pseudo : ${person.pseudo}",
                         modifier = Modifier.fillMaxWidth(),
@@ -59,7 +58,8 @@ fun DemoViewModelPage(viewModel: DemoViewModel) {
             }
             WrapPadding {
                 EniButton(buttonText = "Incrementer", onClick = {
-                    viewModel.persons.value+=Person("Titi", 69)
+                    // Ajouter une personne dans la liste
+                    viewModel.persons.value += Person("Titi", 69)
                 })
             }
         }
@@ -70,6 +70,7 @@ fun DemoViewModelPage(viewModel: DemoViewModel) {
 @Composable
 fun DemoViewModelPreview() {
 
+    // Déclarer un view model
     var viewModel = DemoViewModel()
 
     DemoViewModelPage(viewModel)
